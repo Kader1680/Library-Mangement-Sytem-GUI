@@ -8,26 +8,31 @@ private:
     double price;
     int quantity;
 public:
-    Bookcls();
-    void setTitle(std::string title){
+    Bookcls() : id(0), title(""), auth(""), price(0.0), quantity(0) {}
+    void setTitle(){
+            std::cout<<"Put Title";
             std::cin>>this->title;
+            
     }   
     std::string getTitle(){
             return title;
     }
-    void setAuth(std::string auth){
+    void setAuth(){
+            std::cout<<"Put Auth";            
             std::cin>>this->auth;
     }   
     std::string getAuth(){
             return auth;
     }
-    void setPrice(double price){
+    void setPrice(){
+            std::cout<<"Put Price";
             std::cin>>this->price;
     }   
     double getPrice(){
             return price;
     }
-    void setQuantity(int quantity){
+    void setQuantity(){
+            std::cout<<"Put Quantity";
             std::cin>>this->quantity;
     }   
     std::string getQuantity(){
