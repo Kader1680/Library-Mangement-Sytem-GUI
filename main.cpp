@@ -1,93 +1,39 @@
-#include <QApplication>
-#include <QWidget>
-#include <QVBoxLayout>
-#include <QFormLayout>
-#include <QLineEdit>
-#include <QPushButton>
-#include <QLabel>
+#include <gtk/gtk.h>
+#include <iostream>
 
-
-int add(int a, int b){
-    int result = a + b;
-    return result;
+// Callback function for the button click
+static void on_button_clicked(GtkButton* button, gpointer user_data) {
+    std::cout << "Button clicked!" << std::endl;
 }
 
+// Callback for the application "activate" signal
+static void on_app_activate(GtkApplication* app, gpointer user_data) {
+    // Create a new window
+    GtkWidget* window = gtk_application_window_new(app);
+    gtk_window_set_title(GTK_WINDOW(window), "Gt");
+    gtk_window_set_default_size(GTK_WINDOW(window), 200, 100);
 
+    // Create a button
+    GtkWidget* button = gtk_button_new_with_label("Click Me");
+    g_signal_connect(button, "clicked", G_CALLBACK(on_button_clicked), nullptr);
 
-int main(int argc, char **argv)
-{
-    QApplication app(argc, argv);
+    // Add the button to the window
+    gtk_window_set_child(GTK_WINDOW(window), button);
 
-    // Create main window
-    QWidget window;
-    window.setWindowTitle("Register Form");
-    window.setFixedSize(500, 400); // Set window size
-    window.setStyleSheet("background-color: #2b2b2b; color: white;");
+    // Present the window
+    gtk_window_present(GTK_WINDOW(window));
+}
 
-    // Layouts
-    QVBoxLayout *mainLayout = new QVBoxLayout(&window);
-    QFormLayout *formLayout = new QFormLayout();
+int main(int argc, char** argv) {
+    // Initialize GTK application
+    GtkApplication* app = gtk_application_new("com.example.Gtk4Button", G_APPLICATION_DEFAULT_FLAGS);
 
-    // Input Fields
-    QLineEdit *firstNameInput = new QLineEdit();
-    QLineEdit *lastNameInput = new QLineEdit();
-    QLineEdit *emailInput = new QLineEdit();
-    QLineEdit *passwordInput = new QLineEdit();
+    // Connect the "activate" signal
+    g_signal_connect(app, "activate", G_CALLBACK(on_app_activate), nullptr);
 
-    QFormLayout *formadd = new QFormLayout();
+    // Run the application
+    int status = g_application_run(G_APPLICATION(app), argc, argv);
 
-    // Input Fields
-    QLineEdit *a = new QLineEdit();
-    QLineEdit *b = new QLineEdit();
-
-    a->setPlaceholderText("Enter number");
-    b->setPlaceholderText("Enter number");
-
-    // Set placeholders
-    firstNameInput->setPlaceholderText("Enter First Name");
-    lastNameInput->setPlaceholderText("Enter Last Name");
-    emailInput->setPlaceholderText("Enter Email");
-    passwordInput->setPlaceholderText("Enter Password");
-
-    // Set placeholder text color
-    firstNameInput->setStyleSheet("QLineEdit { color: white; } QLineEdit::placeholder { color: grey; }");
-    lastNameInput->setStyleSheet("QLineEdit { color: white; } QLineEdit::placeholder { color: grey; }");
-    emailInput->setStyleSheet("QLineEdit { color: white; } QLineEdit::placeholder { color: grey; }");
-    passwordInput->setStyleSheet("QLineEdit { color: white; } QLineEdit::placeholder { color: grey; }");
-
-    // Set password input mode
-    passwordInput->setEchoMode(QLineEdit::Password);
-
-    // Add fields to form layout
-    formLayout->addRow("First Name:", firstNameInput);
-    formLayout->addRow("Last Name:", lastNameInput);
-    formLayout->addRow("Email:", emailInput);
-    formLayout->addRow("Password:", passwordInput);
-
-    // Submit Button
-    QPushButton *submitButton = new QPushButton("Submit");
-    submitButton->setStyleSheet(
-        "background-color: #4caf50; color: white; font-size: 16px; padding: 8px; border-radius: 5px;"
-        "border: none;"
-        "hover { background-color: #45a049; }"
-        );
-
-    // Add a label for the title
-    QLabel *brandLabel = new QLabel("My Book");
-    QLabel *titleLabel = new QLabel("Register Form");
-    titleLabel->setAlignment(Qt::AlignCenter);
-    titleLabel->setStyleSheet("font-size: 20px; font-weight: bold; margin-bottom: 15px;");
-
-    brandLabel->setAlignment(Qt::AlignCenter);
-    brandLabel->setStyleSheet("font-size: 35px; font-weight: bold; margin-bottom: 15px;");
-
-    // Add widgets to the main layout
-    mainLayout->addWidget(titleLabel);
-    mainLayout->addLayout(formLayout);
-    mainLayout->addWidget(submitButton);
-
-    // Display the window
-    window.show();
-
-    return app.exec();
+    g_object_unref(app);
+    return status;
 }
