@@ -1,59 +1,67 @@
 #include<iostream>
-class clsBook{
-    
-     
 
-    private:
-        int identifer;
-        std::string title;
-        std::string auther;
-        std::string Category;
-        
-    public:
+class clsBook {
+private:
+    int identifer, years;
+    std::string title, auther, Category;
+    bool isAvaible;
 
-        clsBook( )
-        {
+public:
+    // Default constructor
+    clsBook() : identifer(0), years(0), isAvaible(true) {}
 
-         
-           
-        }
-        // set the data        
-        void setTitle(){
-            std::cout<<"enter the title of the boook ";
-            std::cin>>this->title;
-        }
+    // Setters
+    void setTitle() {
+        std::cout << "Enter the title of the book: ";
+        std::cin >> this->title;
+    }
 
-         void setAuther(){
-            std::cout<<"enter the Auther of the boook ";
-            std::cin>>this->auther;
+    void setAuther() {
+        std::cout << "Enter the author of the book: ";
+        std::cin >> this->auther;
+    }
 
-        }
+    void setCategory() {
+        std::cout << "Enter the category of the book: ";
+        std::cin >> this->Category;
+    }
 
-         void setCategory(){
-            std::cout<<"enter the Category of the boook ";
-            std::cin>>this->Category;
+    void setIdentifer() {
+        std::cout << "Enter the identifier of the book: ";
+        std::cin >> this->identifer;
+    }
 
-        }
-        
-        // get the data
-        
-        std::string getTitle(){
-            return title;
+    void setYears() {
+        std::cout << "Enter the publication year of the book: ";
+        std::cin >> this->years;
+    }
 
-        }
-        std::string getAuther(){
-            return auther;
-            
-        }
+    void setAvailability(bool availability) {
+        this->isAvaible = availability;
+    }
 
-        std::string getCategory(){
-            return Category;
-            
-        }
+    // Getters
+    std::string getTitle() {
+        return title;
+    }
 
-        
+    std::string getAuther() {
+        return auther;
+    }
 
+    std::string getCategory() {
+        return Category;
+    }
 
+    int getIdentifer() {
+        return identifer;
+    }
 
+    int getYears() {
+        return years;
+    }
 
+    bool getAvailability() {
+        return isAvaible;
+    }
 };
