@@ -7,52 +7,46 @@ class clsBook{
         int identifer;
         std::string title;
         std::string auther;
-        std::string auther;
         std::string Category;
         
     public:
 
-        clsBook( int identifer, 
-            std::string title, 
-            std::string auther , 
-            std::string Category)
+        clsBook( )
         {
 
-            this->title = title;
-            this->auther = auther;
-            this->Category = Category;
+         
            
         }
         // set the data        
         void setTitle(){
-            cout<<"enter the title of the boook";
-            cin>>this->title;
+            std::cout<<"enter the title of the boook ";
+            std::cin>>this->title;
         }
 
          void setAuther(){
-            cout<<"enter the Auther of the boook";
-            cin>>this->Auther;
+            std::cout<<"enter the Auther of the boook ";
+            std::cin>>this->auther;
 
         }
 
          void setCategory(){
-            cout<<"enter the Category of the boook";
-            cin>>this->Category;
+            std::cout<<"enter the Category of the boook ";
+            std::cin>>this->Category;
 
         }
         
         // get the data
         
-        string getTitle(){
+        std::string getTitle(){
             return title;
 
         }
-        string getAuther(){
-            return Auther;
+        std::string getAuther(){
+            return auther;
             
         }
 
-        string getCategory(){
+        std::string getCategory(){
             return Category;
             
         }
